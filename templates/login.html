@@ -1,0 +1,29 @@
+{%extends "layout.html"%}
+
+{%block contents%}
+<div class="container panel panel-default ">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class=flashes>
+        {% for category, message in messages %}
+        <p class="{{ category }}">{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+    <h3>ログイン</h3>
+    <hr>
+
+    <div class="panel-body">
+        <div class="container">
+            <form action="/login" class="form-horizontal" method="post" style="width: 330px; margin: auto;">
+                <input class="form-control" autocomplete="off" style="margin-bottom: 15px;" type="text"
+                    placeholder="ユーザー名" name="username" required>
+                <input class="form-control" style="margin-bottom: 15px;" type="password" placeholder="パスワード"
+                    name="password" required>
+                <button class="btn btn-primary btn-block">ログイン</button>
+            </form>
+        </div>
+    </div>
+</div>
+{%endblock%}

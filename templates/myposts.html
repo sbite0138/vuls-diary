@@ -1,0 +1,38 @@
+{%extends "layout.html"%}
+
+{%block contents%}
+<div class="container panel panel-default mt-5">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class=flashes>
+        {% for category, message in messages %}
+        <p class="{{ category }}">{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+    <h3>自分の投稿</h3>
+    <hr>
+
+    <div class="panel-body">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ユーザー</th>
+                    <th>内容</th>
+                    <th>投稿日時</th>
+                </tr>
+            </thead>
+            <tbody class="list">
+                {% for info in posts %}
+                <tr>
+                    <td> {{info.username|safe}} </td>
+                    <td>{{info.text}}</td>
+                    <td>{{info.postdate}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{%endblock%}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<style>
+    body,
+    tooltip,
+    popover {
+        font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Yu Gothic", YuGothic, Verdana, Meiryo, "M+ 1p", sans-serif;
+    }
+</style>
+
+<body>
+    <div id="main-div" class="float-container">
+        <nav class="navbar bg-secondary">
+            <div class="container">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="/about">このサイトについて </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="/submit">投稿</a>
+                    </li>
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="/myposts">投稿一覧</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <ul class="nav navbar-right">
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="/logout">ログアウト</a>
+                    </li>
+                    <li class="nav-item navbar-right">
+                        <a class="nav-link text-light">{{current_user.username|safe}}</a>
+                    </li>
+
+                    {%else%}
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="/login">ログイン</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="/register">ユーザー登録</a>
+                    </li>
+
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+        <div>
+            {%block contents%}
+            {%endblock%}
+        </div>
+    </div>
+</body>
+
+</html>

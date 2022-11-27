@@ -1,0 +1,36 @@
+{%extends "layout.html"%}
+
+{%block contents%}
+<div class="container panel panel-default mt-5">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class=flashes>
+        {% for category, message in messages %}
+        <p class="{{ category }}">{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+    <h3>提出方法</h3>
+    <hr>
+
+    <div class="panel-body">
+
+        {% if current_user.is_authenticated %}
+        <p>投稿したい内容を入力し、postボタンを押してください</p>
+        <form method="post" action="/submit" enctype="multipart/form-data">
+            <div>
+                <input name="file" accept="text/plain" />
+                <input type="submit" value="post" class="btn-blue">
+            </div>
+        </form>
+
+        {%else%}
+        <p>投稿を行うにはログインする必要があります<br>
+            右上のメニューからログインorユーザー登録を行ってください</p>
+        {% endif %}
+    </div>
+</div>
+
+
+{%endblock%}
